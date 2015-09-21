@@ -24,8 +24,8 @@
 
 # Executables
 *.exe
-*.out
 *.app
+bin/
 
 # Temp files
 *~
