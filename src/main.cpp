@@ -11,8 +11,10 @@
 
 #include <cstdlib> // EXIT_SUCCESS, EXIT_FAILURE
 #include <iostream> // cout, endl
+#include "Parser.h"
 
 int main(int argc, char** argv) {
     std::cout << "HELLO WORLD" << std::endl;
+    Parser("");
     return EXIT_SUCCESS;
 }
