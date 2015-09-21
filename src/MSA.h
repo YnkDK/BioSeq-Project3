@@ -12,6 +12,8 @@
 #ifndef BIOSEQ_PROJECT3_MSA_H
 #define BIOSEQ_PROJECT3_MSA_H
 
+#include <stdint.h>
+
 class MSA {
 public:
 
