@@ -13,4 +13,4 @@ set(SOURCE_FILES
 set(ALIGNMENT_ALGS
         src/MSA.h)
 
-add_executable(BioSeq_Project2 ${ALIGNMENT_ALGS} ${SOURCE_FILES})
+add_executable(BioSeq_Project3 ${ALIGNMENT_ALGS} ${SOURCE_FILES})

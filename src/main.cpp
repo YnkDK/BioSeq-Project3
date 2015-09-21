@@ -9,9 +9,10 @@
 ** Author: Martin Storgaard, Konstantinos Mampentzidis and Henrik McQuoid Jespersen
 ** -----------------------------------------------------------------------------------*/
 
-#include <cstdlib>
+#include <cstdlib> // EXIT_SUCCESS, EXIT_FAILURE
+#include <iostream> // cout, endl
 
 int main(int argc, char** argv) {
-
+    std::cout << "HELLO WORLD" << std::endl;
     return EXIT_SUCCESS;
 }
