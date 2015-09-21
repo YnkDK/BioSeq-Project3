@@ -15,6 +15,6 @@
 
 int main(int argc, char** argv) {
     std::cout << "HELLO WORLD" << std::endl;
-    Parser("");
+    Parser("input/testseqs_10_3.fasta");
     return EXIT_SUCCESS;
 }
