@@ -11,6 +11,6 @@ set(SOURCE_FILES
         src/main.cpp)
 
 set(ALIGNMENT_ALGS
-        src/MSA.h)
+        src/MSA.h src/Parser.cpp src/Parser.h)
 
 add_executable(BioSeq_Project3 ${ALIGNMENT_ALGS} ${SOURCE_FILES})

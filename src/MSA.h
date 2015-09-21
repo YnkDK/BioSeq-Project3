@@ -13,6 +13,7 @@
 #define BIOSEQ_PROJECT3_MSA_H
 
 #include <stdint.h>
+#include "Parser.h"
 
 class MSA {
 public:
@@ -21,7 +22,7 @@ public:
      * TODO: What should be initialized?
      * TODO: Define parameters
      */
-    virtual void initialize() = 0;
+    virtual void initialize(Parser &parser) = 0;
 
     /**
      * Fill out the 3-dimensional cube D, such that D[n,n',n''] would be the optimal
