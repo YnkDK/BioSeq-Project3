@@ -9,13 +9,14 @@
 ** Author: Martin Storgaard, Konstantinos Mampentzidis and Henrik McQuoid Jespersen
 ** -----------------------------------------------------------------------------------*/
 
-#ifndef BIOSEQ_PROJECT2_GLOBAL_AFFINE_H
-#define BIOSEQ_PROJECT2_GLOBAL_AFFINE_H
+#ifndef BIOSEQ_PROJECT2_SP_EXACT_3_H
+#define BIOSEQ_PROJECT2_SP_EXACT_3_H
 #include "MSA.h"
 #include <vector>
+#define inf 9999999999999
 using namespace std;
 
-class GlobalAffine : public MSA {
+class SP_EXACT_3 : public MSA {
     
 private:
     
@@ -23,38 +24,19 @@ private:
      * variables
      * 
      */
-    
+        
     vector<vector<vector<int64_t>>> D;
     int n;
-	int64_t score;
-	Parser* parser;
-	int gap;
+    int64_t score;
+    Parser* parser;
+    int gap;
     
     /*
      * functions
      * 
      */
 	
-	int64_t sp(int a, int b, int c){
-	
-		if(a!=gap && b!=gap && c!=gap)
-			return parser->score[a][b] + parser->score[b][c] + parser->score[a][c];
-		else if(a!=gap && b!=gap && c==gap)
-			return parser->score[a][b]+parser->gap_cost*2;
-		else if(a!=gap && b==gap && c!=gap)
-			return parser->score[a][c] + parser->gap_cost*2;
-		else if(a==gap && b!=gap && c!=gap)
-			return parser->score[b][c]+parser->gap_cost*2;
-		else if(a!=gap && b==gap && c==gap)
-			return 2*parser->gap_cost;
-		else if(a==gap && b!=gap && c==gap)
-			return 2*parser->gap_cost;
-		else if(a==gap && b==gap && c!=gap)
-			return 2*parser->gap_cost;
-		
-	}
-	
-    
+    int64_t sp(int a, int b, int c);
     
 public:
     /*
@@ -72,4 +54,4 @@ public:
      
 };
 
-#endif //BIOSEQ_PROJECT2_GLOBAL_AFFINE_H
+#endif //BIOSEQ_PROJECT2_SP_EXACT_3_H
