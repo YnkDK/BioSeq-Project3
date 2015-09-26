@@ -9,14 +9,15 @@
 ** Author: Martin Storgaard, Konstantinos Mampentzidis and Henrik McQuoid Jespersen
 ** -----------------------------------------------------------------------------------*/
 
-#ifndef BIOSEQ_PROJECT2_SP_EXACT_3_H
-#define BIOSEQ_PROJECT2_SP_EXACT_3_H
+#ifndef BIOSEQ_PROJECT2_SP_APPROX_H
+#define BIOSEQ_PROJECT2_SP_APPROX_H
 #include "MSA.h"
 #include <vector>
+#include <list>
 #define inf 9999999999999
 using namespace std;
 
-class SP_EXACT_3 : public MSA {
+class SP_APPROX : public MSA {
     
 private:
     
@@ -25,21 +26,25 @@ private:
      * 
      */
         
-    vector<vector<vector<int64_t>>> D;
-    vector<char> alignment;
+    vector<vector<int64_t>> S;
+    vector<char> two_alignment; //stores alignment between two sequences
     int n;
     int64_t score;
     Parser* parser;
     int gap;
+    size_t S1; //index to S1
+    size_t x,y;//index to the two sequences being aligned
+    size_t k; //number of sequences
+    vector<list<char>> M; //stores M, use list since it is implemented as a doubly connected list (ie inserting at a specific position once found takes O(1) time)
     
     /*
      * functions
      * 
      */
-	
-    int64_t sp(int a, int b, int c);
-    void print_alignment();
-    void find_alignment_helper(int i, int j, int k);
+    void find_two_alignment_helper(int i, int j);
+    void find_two_alignment();
+    void compute_S(); //finds optimal alignment score when aligning two sequences denoted by their indexes i and j
+    
     
 public:
     /*
@@ -49,16 +54,12 @@ public:
     void initialize(Parser& parser);
     
     /*
-     * compute the D matrix ( the cost matrix ) and return the number of optimal aligments
+     * computes the approximation SP score
      */
     void compute_D();
-	
+        
     int64_t getScore();
-    
-    void find_alignment();
-    
-    bool verify();
     
 };
 
-#endif //BIOSEQ_PROJECT2_SP_EXACT_3_H
+#endif //BIOSEQ_PROJECT2_SP_APPROX_H

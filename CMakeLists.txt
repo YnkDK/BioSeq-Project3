@@ -11,6 +11,6 @@ set(SOURCE_FILES
         src/main.cpp)
 
 set(ALIGNMENT_ALGS
-        src/MSA.h src/Parser.cpp src/Parser.h src/SP_EXACT_3.h src/SP_EXACT_3.cpp)
+        src/MSA.h src/Parser.cpp src/Parser.h src/SP_EXACT_3.h src/SP_EXACT_3.cpp src/SP_APPROX.h src/SP_APPROX.cpp)
 
 add_executable(BioSeq_Project3 ${ALIGNMENT_ALGS} ${SOURCE_FILES})

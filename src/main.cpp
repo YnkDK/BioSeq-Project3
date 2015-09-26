@@ -13,10 +13,13 @@
 #include <iostream> // cout, endl
 #include "Parser.h"
 #include "SP_EXACT_3.h"
+#include "SP_APPROX.h"
 
 int main(int argc, char** argv) {
     Parser parser("input/testseqs_10_3.fasta");
-    SP_EXACT_3 sp_ex;
+    
+    
+    /*SP_EXACT_3 sp_ex;
     sp_ex.initialize(parser);
     sp_ex.compute_D();
     cout<<"Optimal alignment cost: "<<sp_ex.getScore()<<endl;
@@ -26,6 +29,11 @@ int main(int argc, char** argv) {
     if(sp_ex.verify())
         cout<<"SUCCESS!!!"<<endl;
     else 
-        cout<<"FAILURE!!!"<<endl;
+        cout<<"FAILURE!!!"<<endl;*/
+    
+    SP_APPROX sp_approx;
+    sp_approx.initialize(parser);
+    sp_approx.compute_D();
+    
     return EXIT_SUCCESS;
 }
