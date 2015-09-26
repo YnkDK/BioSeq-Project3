@@ -26,6 +26,7 @@ private:
      */
         
     vector<vector<vector<int64_t>>> D;
+    vector<char> alignment;
     int n;
     int64_t score;
     Parser* parser;
@@ -37,6 +38,8 @@ private:
      */
 	
     int64_t sp(int a, int b, int c);
+    void print_alignment();
+    void find_alignment_helper(int i, int j, int k);
     
 public:
     /*
@@ -51,7 +54,11 @@ public:
     void compute_D();
 	
     int64_t getScore();
-     
+    
+    void find_alignment();
+    
+    bool verify();
+    
 };
 
 #endif //BIOSEQ_PROJECT2_SP_EXACT_3_H

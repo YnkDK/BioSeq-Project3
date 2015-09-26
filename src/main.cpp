@@ -15,13 +15,17 @@
 #include "SP_EXACT_3.h"
 
 int main(int argc, char** argv) {
-    std::cout << "HELLO WORLD" << std::endl;
-    Parser parser("input/testseqs_200_3.fasta");
+    Parser parser("input/testseqs_10_3.fasta");
     SP_EXACT_3 sp_ex;
-    //sp_ex.initialize(parser);
-    cout<<parser.gap_cost<<endl;
     sp_ex.initialize(parser);
     sp_ex.compute_D();
-    cout<<sp_ex.getScore()<<endl;
+    cout<<"Optimal alignment cost: "<<sp_ex.getScore()<<endl;
+    cout<<"Printing an alignment..."<<endl;
+    sp_ex.find_alignment();
+    cout<<"Verifying that the alignment matches the optimal cost..."<<endl;
+    if(sp_ex.verify())
+        cout<<"SUCCESS!!!"<<endl;
+    else 
+        cout<<"FAILURE!!!"<<endl;
     return EXIT_SUCCESS;
 }
