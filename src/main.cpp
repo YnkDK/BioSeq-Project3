@@ -16,8 +16,7 @@
 #include "SP_APPROX.h"
 
 int main(int argc, char** argv) {
-    Parser parser("input/testseqs_10_3.fasta");
-    
+    Parser parser(argv[1]);
     
     /*SP_EXACT_3 sp_ex;
     sp_ex.initialize(parser);
@@ -30,10 +29,10 @@ int main(int argc, char** argv) {
         cout<<"SUCCESS!!!"<<endl;
     else 
         cout<<"FAILURE!!!"<<endl;*/
-    
+
     SP_APPROX sp_approx;
     sp_approx.initialize(parser);
     sp_approx.compute_D();
-    
+  
     return EXIT_SUCCESS;
 }

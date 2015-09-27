@@ -26,7 +26,7 @@ private:
      * 
      */
         
-    vector<vector<int64_t>> S;
+    vector<vector<int64_t>> S; //the cost matrix when trying to align two sequences
     vector<char> two_alignment; //stores alignment between two sequences
     int n;
     int64_t score;
@@ -35,16 +35,20 @@ private:
     size_t S1; //index to S1
     size_t x,y;//index to the two sequences being aligned
     size_t k; //number of sequences
-    vector<list<char>> M; //stores M, use list since it is implemented as a doubly connected list (ie inserting at a specific position once found takes O(1) time)
+    vector<list<char>> M; //stores M
+    size_t M_size; //size of M
     
     /*
      * functions
      * 
      */
-    void find_two_alignment_helper(int i, int j);
-    void find_two_alignment();
+    void find_two_alignment_helper(int i, int j); //just a helper for find_two_alignment like in the second project
+    void find_two_alignment(); //find alignment of two sequences after having computed S
     void compute_S(); //finds optimal alignment score when aligning two sequences denoted by their indexes i and j
-    
+    void updateM(); //extend M
+    void printM(); //prints alignment of M
+    void print_two_alignment(); //prints the two alignment stored in two_alignment
+    void sp_score(); //finds the sp score of M
     
 public:
     /*

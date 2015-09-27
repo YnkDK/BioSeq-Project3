@@ -2,6 +2,8 @@
 
 void SP_EXACT_3::initialize(Parser& parser)
 {	
+    D.clear();
+    alignment.clear();
     n = parser.sequences[0].size()+1;
     D.resize(n, vector< vector<int64_t>>(n, vector<int64_t>(n, 0)));
     this->parser = &parser;
@@ -82,6 +84,8 @@ void SP_EXACT_3::compute_D()
         
 }
 
+
+
 void SP_EXACT_3::find_alignment_helper(int i, int j, int k){
     
     if(i>0 && j>0 && k>0 && D[i][j][k] == (D[i-1][j-1][k-1] + sp(parser->sequences[0][i-1], parser->sequences[1][j-1], parser->sequences[2][k-1]))){
@@ -147,7 +151,6 @@ void SP_EXACT_3::find_alignment_helper(int i, int j, int k){
 
 void SP_EXACT_3::find_alignment()
 {
-    
     find_alignment_helper(n-1,n-1,n-1);
     print_alignment();
     

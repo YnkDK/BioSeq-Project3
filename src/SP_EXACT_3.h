@@ -52,7 +52,7 @@ public:
      * compute the D matrix ( the cost matrix ) and return the number of optimal aligments
      */
     void compute_D();
-	
+    
     int64_t getScore();
     
     void find_alignment();
