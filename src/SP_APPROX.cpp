@@ -97,39 +97,41 @@ void SP_APPROX::updateM()
     //initialize iterators
     M_size+=1;
     vector<list<char>::iterator> iters(M_size);
+    M[M_size-1].resize(M[0].size(), '*');
     for(size_t d=0;d<M_size;d++) iters[d] = M[d].begin();
-    M[M_size-1].resize(M[0].size());
     list<char>::iterator pnew = M[M_size-1].begin();//pointer to new alignment in M, the one we are about to add
-    while(ps1!=M[0].end() && i1<this->two_alignment.size()){
-	if(*ps1 != '-' && two_alignment[i1]!='-'){
-	    ps1++;
-	    counter++;
-	    *pnew = two_alignment[i1+1];
-	    pnew++;
-	    i1 += 2;
-	}
-	else{
-	    if(*ps1 == '-'){
-		ps1++;
-		counter++;
-		*pnew = '-';
-		pnew++;
-	    }
-	    else if(two_alignment[i1] == '-'){
-		//add space column to M
-		//make every iterator point to the same position as i in M
-		size_t a,b;
-		for(a=0;a<M_size;a++){
-		    for(b=0;b<counter;b++){
-			iters[a]++;
-		    }
-		    M[a].insert(iters[a], '-');
-		}
-		*pnew = two_alignment[i1+1];
-		i1 = i1 + 2;
-		counter = 0;
-	    }
-	}
+    while(ps1!=M[0].end() && i1<two_alignment.size()){
+        if(*ps1 != '-' && two_alignment[i1]!='-'){
+            ps1++;
+            counter++;
+            *pnew = two_alignment[i1+1];
+            pnew++;
+            i1 += 2;
+        }
+        else{
+            if(*ps1 == '-'){
+                ps1++;
+                counter++;
+                *pnew = '-';
+                pnew++;
+            }
+            else if(two_alignment[i1] == '-'){
+                //add space column to M
+                //make every iterator point to the same position as i in M
+                size_t a,b;
+                for(a=0;a<M_size;a++){
+                    for(b=0;b<counter;b++){
+                        iters[a]++;
+                    }
+                    M[a].insert(iters[a], '-');
+                }
+                pnew--;
+                *pnew = two_alignment[i1+1];
+                pnew++;
+                i1 = i1 + 2;
+                counter = 0;
+            }
+        }
     }
 }
 
