@@ -5,8 +5,8 @@ void SP_EXACT_3::initialize(Parser& parser)
     D.clear();
     alignment.clear();
     n1 = parser.sequences[0].size() + 1;
-    n2 = parser.sequences[0].size() + 1;
-    n3 = parser.sequences[0].size() + 1;
+    n2 = parser.sequences[1].size() + 1;
+    n3 = parser.sequences[2].size() + 1;
     D.resize(n1, vector<vector<int64_t>>(n2, vector<int64_t>(n3, 0)));
     this->parser = &parser;
     gap = -1;	
