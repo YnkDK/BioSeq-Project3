@@ -9,4 +9,4 @@ if ! ./make.sh >/dev/null; then
     echo "=============================================="
     exit $?
 fi
-./bin/BioSeq_Project3
+./bin/BioSeq_Project3 sp_exact_3 input/brca1-testseqs.fasta compute_d print_alignments print_score verify

@@ -185,3 +185,7 @@ bool SP_EXACT_3::verify(){
     return alignment_score == getScore();
     
 }
+
+void SP_EXACT_3::print_alignments() {
+    find_alignment();
+}

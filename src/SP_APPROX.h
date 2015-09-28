@@ -63,6 +63,14 @@ public:
     void compute_D();
         
     int64_t getScore();
+
+    void print_alignments();
+
+    bool verify() {
+        // The getScore function compute the score as we would verify it,
+        // thus it does not make sense to do the same for verification
+        return true;
+    }
     
 };
 

@@ -266,3 +266,7 @@ void SP_APPROX::sp_score(){
     }
     
 }
+
+void SP_APPROX::print_alignments() {
+    printM();
+}

@@ -35,6 +35,9 @@ public:
      */
     virtual int64_t getScore() = 0;
 
+    virtual void print_alignments() = 0;
+
+    virtual bool verify() = 0;
 
 };
 
