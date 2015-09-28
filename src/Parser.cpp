@@ -108,9 +108,10 @@ void Parser::parse_fasta_file(const char *&filename) {
                     if (c == ' ') continue;
                     char idx = find(proteins.begin(), proteins.end(), toupper(c)) - proteins.begin();
                     if (idx == (char) proteins.size()) {
-                        cerr << "Unknown protein '" << c << "'. Halting." << endl;
-                        cerr << "TODO: Implement this!" << endl;
-                        exit(EXIT_FAILURE);
+                        sequences[k].push_back(0);
+//                        cerr << "Unknown protein '" << c << "'. Halting." << endl;
+//                        cerr << "TODO: Implement this!" << endl;
+//                        exit(EXIT_FAILURE);
                     } else {
                         sequences[k].push_back(idx);
                     }
