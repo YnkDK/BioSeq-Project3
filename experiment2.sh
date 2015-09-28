@@ -15,4 +15,4 @@ if ! ./make.sh >/dev/null; then
     echo "=============================================="
     exit $?
 fi
-./bin/BioSeq_Project3
+./bin/BioSeq_Project3 perm_exp input/brca1-testseqs_5.fasta
