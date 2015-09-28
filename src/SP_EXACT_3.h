@@ -59,6 +59,8 @@ public:
     void find_alignment();
     
     bool verify();
+
+    void print_alignments();
     
 };
 
