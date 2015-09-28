@@ -100,7 +100,7 @@ void SP_APPROX::updateM()
     M[M_size-1].resize(M[0].size(), '*');
     for(size_t d=0;d<M_size;d++) iters[d] = M[d].begin();
     list<char>::iterator pnew = M[M_size-1].begin();//pointer to new alignment in M, the one we are about to add
-    while(ps1!=M[0].end() && i1<two_alignment.size()){
+	while(ps1!=M[0].end() && i1<two_alignment.size()){
         if(*ps1 != '-' && two_alignment[i1]!='-'){
             ps1++;
             counter++;
@@ -133,6 +133,17 @@ void SP_APPROX::updateM()
             }
         }
     }
+    while(i1<two_alignment.size()){
+		//we have gaps in the end of the first sequence, so we need to create gap columns for the remaining
+		//characters of the second sequence
+		
+		size_t a;
+		for(a=0;a<M_size-1;a++)
+			M[a].push_back('-');
+		M[a].push_back(two_alignment[i1+1]);
+		i1 = i1+2;
+	}
+    
 }
 
 void SP_APPROX::compute_D()
