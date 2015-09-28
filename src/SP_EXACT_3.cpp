@@ -4,8 +4,10 @@ void SP_EXACT_3::initialize(Parser& parser)
 {	
     D.clear();
     alignment.clear();
-    n = parser.sequences[0].size()+1;
-    D.resize(n, vector< vector<int64_t>>(n, vector<int64_t>(n, 0)));
+    n1 = parser.sequences[0].size() + 1;
+    n2 = parser.sequences[0].size() + 1;
+    n3 = parser.sequences[0].size() + 1;
+    D.resize(n1, vector<vector<int64_t>>(n2, vector<int64_t>(n3, 0)));
     this->parser = &parser;
     gap = -1;	
  
@@ -53,10 +55,10 @@ int64_t SP_EXACT_3::sp(int a, int b, int c)
 
 void SP_EXACT_3::compute_D()
 {
-    int i,j,k;
-    for(i=0;i<n;i++){
-        for(j=0;j<n;j++){
-            for(k=0;k<n;k++){
+    size_t i, j, k;
+    for (i = 0; i < n1; i++) {
+        for (j = 0; j < n2; j++) {
+            for (k = 0; k < n3; k++) {
                 int64_t v0,v1,v2,v3,v4,v5,v6,v7;
                 v0=v1=v2=v3=v4=v5=v6=v7=inf;
                 if(i==0 && j==0 && k==0)
@@ -79,14 +81,13 @@ void SP_EXACT_3::compute_D()
             }
        }
     }
-    
-    score = D[n-1][n-1][n-1];
+
+    score = D[n1 - 1][n2 - 1][n3 - 1];
         
 }
 
 
-
-void SP_EXACT_3::find_alignment_helper(int i, int j, int k){
+void SP_EXACT_3::find_alignment_helper(size_t i, size_t j, size_t k) {
     
     if(i>0 && j>0 && k>0 && D[i][j][k] == (D[i-1][j-1][k-1] + sp(parser->sequences[0][i-1], parser->sequences[1][j-1], parser->sequences[2][k-1]))){
         
@@ -151,7 +152,7 @@ void SP_EXACT_3::find_alignment_helper(int i, int j, int k){
 
 void SP_EXACT_3::find_alignment()
 {
-    find_alignment_helper(n-1,n-1,n-1);
+    find_alignment_helper(n1 - 1, n2 - 1, n3 - 1);
     print_alignment();
     
 }

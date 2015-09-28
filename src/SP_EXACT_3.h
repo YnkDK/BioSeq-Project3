@@ -27,7 +27,7 @@ private:
         
     vector<vector<vector<int64_t>>> D;
     vector<char> alignment;
-    int n;
+    size_t n1, n2, n3;
     int64_t score;
     Parser* parser;
     int gap;
@@ -39,7 +39,8 @@ private:
 	
     int64_t sp(int a, int b, int c);
     void print_alignment();
-    void find_alignment_helper(int i, int j, int k);
+
+    void find_alignment_helper(size_t i, size_t j, size_t k);
     
 public:
     /*
