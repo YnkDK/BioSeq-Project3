@@ -8,6 +8,7 @@ void SP_APPROX::initialize(Parser& parser)
     k = parser.sequences.size();
     M_size = 0;
     gap = -1;   
+	this->experiment_mode = false;
  
 }
 void SP_APPROX::compute_S() {
@@ -180,27 +181,57 @@ void SP_APPROX::compute_D()
      */
   
     //add the Sc(referred to by index S1) sequence to M
-    M.clear();
-    M.resize(k);
-    for(i = 0; i < parser->sequences[S1].size(); i++)
-        M[0].push_back(parser->sequences[S1][i]);
-    M_size = 1;
-    //add the remaining sequences
-    for(i=0;i<k;i++){
     
-        if(i!=S1){
+    if(!experiment_mode){
+		M.clear();
+		M.resize(k);
+		for(i = 0; i < parser->sequences[S1].size(); i++)
+			M[0].push_back(parser->sequences[S1][i]);
+		M_size = 1;
+		//add the remaining sequences
+		for(i=0;i<k;i++){
+    
+			if(i!=S1){
         
-            x = S1;
-            y = i;
-            find_two_alignment();
-            updateM();
+				x = S1;
+				y = i;
+				find_two_alignment();
+				updateM();
 	    
-        }
+			}
     
-    }
-    sp_score();
-    cout<<"Score: "<<score<<endl;
-    printM();
+		}
+		sp_score();
+	}
+	else{
+		
+		vector<int> perm;
+		size_t i;
+		for(i=0;i<k;i++) if(i!=S1) perm.push_back(i);
+		cout<<"Center string: "<<S1<<endl;
+		int permCount=0;
+		do {
+			permCount++;
+			M.clear();
+			M.resize(k);
+			for(i = 0; i < parser->sequences[S1].size(); i++)
+				M[0].push_back(parser->sequences[S1][i]);
+			M_size = 1;
+			//add the remaining sequences
+			x = S1;
+			for(i=0;i<perm.size();i++){
+				y = perm[i];
+				find_two_alignment();
+				updateM();
+			}
+			sp_score();
+			cout<<"Trying permutation: ";
+			for(size_t z=0;z<perm.size();z++) cout<<perm[z]<<" ";
+			cout<<endl;
+			cout<<"Score: "<<score<<endl;
+		} while(std::next_permutation(perm.begin(),perm.end()));
+
+	}
     
 }
 
