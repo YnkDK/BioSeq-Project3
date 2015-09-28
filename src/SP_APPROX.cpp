@@ -3,7 +3,6 @@
 void SP_APPROX::initialize(Parser& parser)
 {
     
-    n = parser.sequences[0].size()+1;
     this->parser = &parser;
     k = parser.sequences.size();
     M_size = 0;
@@ -13,19 +12,19 @@ void SP_APPROX::initialize(Parser& parser)
 }
 void SP_APPROX::compute_S() {
     
-    int i,j;
+    size_t i,j;
     S.clear();
-    S.resize(n, vector<int64_t>(n, 0));
+    S.resize(n, vector<int64_t>(m, 0));
     
     for(i=1;i<n;i++)
         S[0][i] = S[0][i-1] + parser->gap_cost;
 
-    for(i=1;i<n;i++)
+    for(i=1;i<m;i++)
         S[i][0] = S[i-1][0] + parser->gap_cost;
 
     for(i=1;i<n;i++){
        
-        for(j=1;j<n;j++){
+        for(j=1;j<m;j++){
                 int64_t v1 = S[i-1][j-1]+parser->score[parser->sequences[x][i-1]][parser->sequences[y][j-1]];
                 int64_t v2 = S[i][j-1]+parser->gap_cost;
                 int64_t v3 = S[i-1][j]+parser->gap_cost;
@@ -81,7 +80,7 @@ void SP_APPROX::find_two_alignment()
     
     compute_S();
     two_alignment.clear();
-    find_two_alignment_helper(n-1,n-1);
+    find_two_alignment_helper(n-1,m-1);
     
 }
 
@@ -169,8 +168,10 @@ void SP_APPROX::compute_D()
             if(i!=j){
                 x = i;
                 y = j;
+				n = parser->sequences[x].size()+1;
+				m = parser->sequences[y].size()+1;
                 compute_S();
-                smCost += S[n-1][n-1];
+                smCost += S[n-1][m-1];
             }
                 
         }
@@ -200,6 +201,8 @@ void SP_APPROX::compute_D()
         
 				x = S1;
 				y = i;
+				n = parser->sequences[x].size()+1;
+				m = parser->sequences[y].size()+1;
 				find_two_alignment();
 				updateM();
 	    
@@ -213,6 +216,8 @@ void SP_APPROX::compute_D()
 		vector<int> perm;
 		size_t i;
 		for(i=0;i<k;i++) if(i!=S1) perm.push_back(i);
+		//perm.resize(7);
+		//perm[0] = 3; perm[1] = 2; perm[2] = 1; perm[3] =7; perm[4] = 4; perm[5] = 5; perm[6]=0;
 		cout<<"Center string: "<<parser->sequence_comment[S1]<<endl;
 		int permCount=0;
 		do {
@@ -226,6 +231,8 @@ void SP_APPROX::compute_D()
 			x = S1;
 			for(i=0;i<perm.size();i++){
 				y = perm[i];
+				n = parser->sequences[x].size()+1;
+				m = parser->sequences[y].size()+1;
 				find_two_alignment();
 				updateM();
 			}
@@ -234,6 +241,7 @@ void SP_APPROX::compute_D()
 			cout<<endl;
 			cout<<"Score: "<<score<<endl;
 		} while(std::next_permutation(perm.begin(),perm.end()));
+		cout<<permCount<<endl;
 
 	}
     

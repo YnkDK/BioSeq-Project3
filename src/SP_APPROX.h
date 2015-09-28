@@ -29,7 +29,7 @@ private:
 	bool experiment_mode;    
     vector<vector<int64_t>> S; //the cost matrix when trying to align two sequences
     vector<char> two_alignment; //stores alignment between two sequences
-    int n;
+    size_t n,m;
     int64_t score;
     Parser* parser;
     int gap;
