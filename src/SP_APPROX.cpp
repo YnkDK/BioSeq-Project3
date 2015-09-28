@@ -144,6 +144,11 @@ void SP_APPROX::updateM()
 		M[a].push_back(two_alignment[i1+1]);
 		i1 = i1+2;
 	}
+	
+	while(pnew!=M[M_size-1].end()){
+		*pnew = '-';
+		pnew++;
+	}
     
 }
 
@@ -208,7 +213,7 @@ void SP_APPROX::compute_D()
 		vector<int> perm;
 		size_t i;
 		for(i=0;i<k;i++) if(i!=S1) perm.push_back(i);
-		cout<<"Center string: "<<S1<<endl;
+		cout<<"Center string: "<<parser->sequence_comment[S1]<<endl;
 		int permCount=0;
 		do {
 			permCount++;
@@ -225,7 +230,6 @@ void SP_APPROX::compute_D()
 				updateM();
 			}
 			sp_score();
-			cout<<"Trying permutation: ";
 			for(size_t z=0;z<perm.size();z++) cout<<perm[z]<<" ";
 			cout<<endl;
 			cout<<"Score: "<<score<<endl;

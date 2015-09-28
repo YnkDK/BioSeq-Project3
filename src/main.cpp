@@ -85,7 +85,15 @@ int main(int argc, char** argv) {
         cout << sp_exact_3.getScore() << endl;
 
 
-    } else {
+    } else if(strcmp(argv[1], "perm_exp") == 0){
+		
+		SP_APPROX sp_approx; 
+		sp_approx.initialize(parser);
+		sp_approx.activate_experiment_mode();
+        sp_approx.compute_D();
+		
+    } 
+    else {
         cerr << "Unknown algorithm. Argument 1 must be either 'sp_exact_3', 'sp_approx' or 'both'. ";
         cerr << "Got: '" << argv[1] << "'" << endl;
         return EXIT_FAILURE;
