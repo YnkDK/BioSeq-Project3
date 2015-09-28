@@ -25,7 +25,8 @@ private:
      * variables
      * 
      */
-        
+	
+	bool experiment_mode;    
     vector<vector<int64_t>> S; //the cost matrix when trying to align two sequences
     vector<char> two_alignment; //stores alignment between two sequences
     int n;
@@ -71,6 +72,10 @@ public:
         // thus it does not make sense to do the same for verification
         return true;
     }
+    //for the second experiment with the 24 different ways of inserting the remaining sequences to M
+    void activate_experiment_mode(){
+		this->experiment_mode = true;
+	}
     
 };
 
