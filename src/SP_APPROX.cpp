@@ -16,10 +16,10 @@ void SP_APPROX::compute_S() {
     S.clear();
     S.resize(n, vector<int64_t>(m, 0));
     
-    for(i=1;i<n;i++)
+    for(i=1;i<m;i++)
         S[0][i] = S[0][i-1] + parser->gap_cost;
 
-    for(i=1;i<m;i++)
+    for(i=1;i<n;i++)
         S[i][0] = S[i-1][0] + parser->gap_cost;
 
     for(i=1;i<n;i++){
