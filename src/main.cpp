@@ -64,21 +64,32 @@ int main(int argc, char** argv) {
         SP_EXACT_3 sp_exact;
         sp_exact.initialize(parser);
         handle_sp_exact_3(sp_exact, argc, argv);
-    } else if (strcmp(argv[1], "sp_approx")) {
+    } else if (strcmp(argv[1], "sp_approx") == 0) {
         cout << "#################" << endl;
         cout << "##  SP_APPROX  ##" << endl;
         cout << "#################" << endl;
         SP_APPROX sp_approx;
         sp_approx.initialize(parser);
 
-    } else if (strcmp(argv[1], "both")) {
+    } else if (strcmp(argv[1], "both") == 0) {
+        cout << parser.sequences[0].size() << "\t";
+        SP_APPROX sp_approx;
+        SP_EXACT_3 sp_exact_3;
+
+        sp_approx.initialize(parser);
+        sp_approx.compute_D();
+        cout << sp_approx.getScore() << "\t";
+
+        sp_exact_3.initialize(parser);
+        sp_exact_3.compute_D();
+        cout << sp_exact_3.getScore() << endl;
+
 
     } else {
         cerr << "Unknown algorithm. Argument 1 must be either 'sp_exact_3', 'sp_approx' or 'both'. ";
         cerr << "Got: '" << argv[1] << "'" << endl;
         return EXIT_FAILURE;
     }
-
 
 /*
     

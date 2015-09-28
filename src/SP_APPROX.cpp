@@ -199,9 +199,7 @@ void SP_APPROX::compute_D()
     
     }
     sp_score();
-    cout<<"Score: "<<score<<endl;
-    printM();
-    
+
 }
 
 int64_t SP_APPROX::getScore()

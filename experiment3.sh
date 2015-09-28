@@ -15,4 +15,16 @@ if ! ./make.sh >/dev/null; then
     echo "=============================================="
     exit $?
 fi
-./bin/BioSeq_Project3
+# Create dir if not present
+mkdir -p output
+# Set header
+echo -e "n\tapprox\texact" > output/testseqs.out
+
+# Loop through all testseqs given in the zip-file
+for f in input/testseqs_*_3.fasta; do
+    # Record the output
+    ./bin/BioSeq_Project3 both ${f} >> output/testseqs.out
+done
+echo "Plotting graph"
+Rscript plot_ratio.R
+evince output/testseqs.pdf
